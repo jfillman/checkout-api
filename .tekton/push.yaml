@@ -1,0 +1,48 @@
+# .tekton/push.yaml
+#
+# BOILERPLATE - generated from platform-cicd's onboarding-templates/.tekton/push.yaml
+# (tenant=platform-cicd-demo, app-name=nodejs-demo-app, image-repo=ghcr.io/jfillman/nodejs-demo-app).
+# Developers never hand-write or edit this file; all developer-facing pipeline behavior
+# lives in this repo's own cicd.yaml instead (see platform-cicd's schemas/cicd.schema.json).
+# This file's only job is telling Pipelines-as-Code "on a push to main, run the
+# platform's `build` Pipeline" - the Pipeline itself is resolved from the shared catalog
+# via Tekton's cluster resolver, never duplicated per repo.
+#
+# If platform-cicd's catalog changes what params the `build` Pipeline requires, this
+# file needs a re-sync from the template - see platform-cicd's
+# docs/cicd-yaml-reference.md "staleness" note.
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: build-
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[push]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/max-keep-runs: "5"
+spec:
+  pipelineRef:
+    resolver: cluster
+    params:
+      - { name: kind, value: pipeline }
+      - { name: name, value: build }
+      - { name: namespace, value: platform-catalog }
+  params:
+    - { name: git-url, value: "{{ repo_url }}" }
+    - { name: git-revision, value: "{{ revision }}" }
+    - { name: image-repo, value: "ghcr.io/jfillman/nodejs-demo-app" }
+    - { name: tenant, value: "platform-cicd-demo" }
+    - { name: app-name, value: "nodejs-demo-app" }
+  workspaces:
+    - name: source
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+  taskRunTemplate:
+    # Tenant's own least-privilege, namespace-scoped ServiceAccount - created at
+    # onboarding. Never a shared/elevated identity. See platform/onboarding/.
+    serviceAccountName: pipeline-runner
+  timeouts:
+    pipeline: "1h"

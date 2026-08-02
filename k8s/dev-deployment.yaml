@@ -1,0 +1,58 @@
+# Convenience manifest for onboarding this app to platform-cicd - apply this ONCE,
+# manually, before the first pipeline run:
+#
+#   kubectl apply -f k8s/dev-deployment.yaml
+#
+# catalog/tasks/deploy-manifests.yaml (in platform-cicd) patches this Deployment's image
+# and waits for rollout - it does NOT create the namespace/Deployment/Service itself
+# (Phase 1 scope, see platform-cicd's docs/onboarding.md step 5). The placeholder image
+# below (registry.k8s.io/pause) won't pass the readiness probe - that's expected and
+# fine; the pod stays not-Ready until the first real pipeline deploy patches it to a
+# real nodejs-demo-app image.
+#
+# If the ghcr.io/<org>/nodejs-demo-app package ends up private, uncomment
+# imagePullSecrets below and create the referenced Secret in THIS namespace first (see
+# platform-cicd's docs/onboarding.md step 6) - otherwise the real deploy will pull-fail.
+# A public package needs no pull secret at all.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-cicd-demo-dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-demo-app
+  namespace: platform-cicd-demo-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: nodejs-demo-app }
+  template:
+    metadata:
+      labels: { app: nodejs-demo-app }
+    spec:
+      # imagePullSecrets:
+      #   - name: ghcr-pull-secret
+      containers:
+        - name: nodejs-demo-app
+          image: registry.k8s.io/pause:3.9 # placeholder - patched by the first real deploy
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet: { path: /healthz, port: 3000 }
+            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet: { path: /healthz, port: 3000 }
+            initialDelaySeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-demo-app
+  namespace: platform-cicd-demo-dev
+spec:
+  selector: { app: nodejs-demo-app }
+  ports:
+    - port: 80
+      targetPort: 3000

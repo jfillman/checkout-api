@@ -1,0 +1,45 @@
+apiVersion: platform/v1
+kind: PipelineConfig
+
+build:
+  agent: nodejs-20
+  script: ./build.sh # not currently invoked by the platform - see build.sh's own header
+  dockerfile: ./Dockerfile
+  unitTest:
+    enabled: true
+    command: ./test.sh
+  sonar: false
+
+test:
+  enabled: true
+  suite: integration # runs ./integration-test.sh, see that file
+
+deploy:
+  lowerEnvironments: [dev]
+  upperEnvironments: []
+  strategy: deployment
+
+ephemeralEnvironments:
+  branch:
+    enabled: false
+  pullRequest:
+    enabled: false
+  ttl: 5d
+
+governance:
+  sast: false
+  imageScan: false
+  policyCheck: false
+  sbom: false
+
+notifications:
+  slack:
+    enabled: false
+
+pipeline:
+  - stage: build
+  - stage: test
+    after: build
+  - stage: deploy
+    after: test
+    env: dev
