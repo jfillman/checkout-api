@@ -8,8 +8,9 @@ WORKDIR /app
 COPY package*.json server.js ./
 COPY node_modules ./node_modules
 
-RUN adduser -D -u 1000 appuser
-USER appuser
+# Official node images already ship a non-root `node` user at uid 1000 - adduser'ing a
+# second uid-1000 user collides and fails the build. Use the one that's already there.
+USER node
 
 ENV NODE_ENV=production
 ENV PORT=3000

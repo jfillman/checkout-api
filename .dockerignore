@@ -1,4 +1,8 @@
-node_modules
+# node_modules is deliberately NOT excluded here - the Dockerfile COPYs it in as-is
+# (build.sh, run by the platform before Dockerfile builds, is what actually produces
+# it - see Dockerfile's own header). Excluding it would break the build; this used to
+# be excluded back when the Dockerfile ran its own npm ci internally, before the
+# build.sh/Dockerfile split.
 test
 .git
 .tekton
