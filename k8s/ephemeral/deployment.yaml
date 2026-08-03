@@ -1,0 +1,37 @@
+# k8s/ephemeral/deployment.yaml
+#
+# No metadata.namespace set here, deliberately - the ApplicationSet's Application
+# template sets spec.destination.namespace per-PR (platform-cicd-demo-pr-<number>), and
+# an un-namespaced manifest lands wherever the sync target says, same as `kubectl apply
+# -f x.yaml -n foo` for a file with no namespace of its own. A hardcoded namespace here
+# would fight that, since this same base is reused for every PR's Application, not just
+# one.
+#
+# image is a placeholder - the ApplicationSet template overrides it per-PR via
+# kustomize.images, pointing at the exact image build-image.yaml already tagged for this
+# PR's head commit (ghcr.io/jfillman/nodejs-demo-app-pr:<12-char-sha>, see
+# .tekton/pull-request.yaml and platform-cicd's catalog/tasks/build-image.yaml - no
+# change needed there, it already tags per-commit).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: nodejs-demo-app }
+  template:
+    metadata:
+      labels: { app: nodejs-demo-app }
+    spec:
+      containers:
+        - name: nodejs-demo-app
+          image: ghcr.io/jfillman/nodejs-demo-app-pr:placeholder
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet: { path: /healthz, port: 3000 }
+            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet: { path: /healthz, port: 3000 }
+            initialDelaySeconds: 3

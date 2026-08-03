@@ -1,0 +1,12 @@
+# k8s/ephemeral/kustomization.yaml
+#
+# The base every PR's ephemeral-environment Application syncs from - the ApplicationSet
+# template (platform-cicd's platform/argocd/tenant-ephemeral-envs-argocd-template.yaml)
+# overrides namePrefix/nameSuffix and images per-PR at generation time; nothing in this
+# repo needs per-PR editing.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml

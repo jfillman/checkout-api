@@ -1,0 +1,10 @@
+# k8s/ephemeral/service.yaml - see deployment.yaml's header comment (no namespace here either).
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-demo-app
+spec:
+  selector: { app: nodejs-demo-app }
+  ports:
+    - port: 80
+      targetPort: 3000
