@@ -39,6 +39,9 @@ spec:
           resources:
             requests:
               storage: 1Gi
+    - name: cache
+      persistentVolumeClaim:
+        claimName: build-cache
   taskRunTemplate:
     serviceAccountName: pipeline-runner
   timeouts:

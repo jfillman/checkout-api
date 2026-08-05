@@ -9,6 +9,8 @@ build:
     enabled: true
     command: ./test.sh
   sonar: false
+  cache:
+    enabled: true
 
 test:
   enabled: true
