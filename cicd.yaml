@@ -32,7 +32,7 @@ governance:
   sast: true
   imageScan: false
   policyCheck: false
-  sbom: true
+  sbom: false
 
 notifications:
   slack:
