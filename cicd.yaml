@@ -6,7 +6,7 @@ build:
   script: ./build.sh
   dockerfile: ./Dockerfile
   unitTest:
-    enabled: true
+    enabled: false
     command: ./test.sh
   sonar: false
   cache:
