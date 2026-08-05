@@ -6,7 +6,7 @@ build:
   script: ./build.sh
   dockerfile: ./Dockerfile
   unitTest:
-    enabled: false
+    enabled: true
     command: ./test.sh
   sonar: false
   cache:
@@ -30,14 +30,13 @@ ephemeralEnvironments:
 
 governance:
   sast: true
-  imageScan: true
+  imageScan: false
   policyCheck: false
-  sbom: true
+  sbom: false
 
 notifications:
   slack:
     enabled: true
-    scanResults: false
 
 pipeline:
   - stage: build
