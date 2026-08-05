@@ -40,9 +40,6 @@ spec:
           resources:
             requests:
               storage: 1Gi
-    - name: cache
-      persistentVolumeClaim:
-        claimName: build-cache
   taskRunTemplate:
     # Tenant's own least-privilege, namespace-scoped ServiceAccount - created at
     # onboarding. Never a shared/elevated identity. See platform/onboarding/.
