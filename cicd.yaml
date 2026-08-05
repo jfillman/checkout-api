@@ -30,7 +30,7 @@ ephemeralEnvironments:
 
 governance:
   sast: true
-  imageScan: false
+  imageScan: true
   policyCheck: false
   sbom: false
 
