@@ -3,8 +3,10 @@ kind: PipelineConfig
 
 build:
   agent: nodejs-20
-  script: ./build.sh
-  dockerfile: ./Dockerfile
+  # TEMPORARY test of the multi-stage-Dockerfile path (Phase 3 item 8.1 live
+  # verification) - script omitted entirely, dockerfile points at a throwaway
+  # multi-stage variant. Revert both lines after this test.
+  dockerfile: ./Dockerfile.multistage-test
   unitTest:
     enabled: true
     command: ./test.sh
