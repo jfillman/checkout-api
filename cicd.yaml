@@ -37,6 +37,7 @@ governance:
 notifications:
   slack:
     enabled: true
+    scanResults: false
 
 pipeline:
   - stage: build
