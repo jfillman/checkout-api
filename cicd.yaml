@@ -29,7 +29,7 @@ ephemeralEnvironments:
   ttl: 5d
 
 governance:
-  sast: false
+  sast: true
   imageScan: false
   policyCheck: false
   sbom: false
