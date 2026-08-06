@@ -7,6 +7,8 @@ Nothing here is meant to be a real product - keep it boring on purpose.
 
 Tenant: `platform-cicd-demo`. Registry: `ghcr.io/jfillman/nodejs-demo-app`.
 
+<!-- trigger: exercising the new Mission Control pipeline visualizer dashboard -->
+
 ## What's in here, and why
 
 | File | Platform stage | Purpose |
