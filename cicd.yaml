@@ -13,7 +13,6 @@ build:
     enabled: true
 
 test:
-  enabled: true
   suite: integration # runs ./integration-test.sh, see that file
 
 deploy:
@@ -33,15 +32,27 @@ governance:
   imageScan: false
   policyCheck: false
   sbom: false
+  allowedCommitSigners:
+    - crossfader@gmail.com
+    - 7268337+jfillman@users.noreply.github.com
 
 notifications:
   slack:
     enabled: true
 
-pipeline:
-  - stage: build
-  - stage: test
-    after: build
-  - stage: deploy
-    after: test
-    env: dev
+# Migrated from the legacy `pipeline:` (singular) list form - removed from the schema
+# in an earlier session (both `pipeline:` itself and each step's `after:` field, which
+# never did anything: chaining was always positional). Same build->test->deploy(dev)
+# shape as before, just expressed the current way - see docs/user-guide/cicd-yaml-reference.md.
+pipelines:
+  ci:
+    trigger:
+      source: git
+      event: push
+      branch: main
+    steps:
+      - stage: build
+      - stage: test
+        env: dev
+      - stage: deploy
+        env: dev
