@@ -1,17 +1,12 @@
 {
   "name": "nodejs-demo-app",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Node.js demo app for exercising platform-cicd's Phase 1 pipeline (build -> test -> deploy-to-dev).",
-  "main": "server.js",
-  "engines": {
-    "node": ">=18"
-  },
+  "version": "0.1.0",
+  "description": "nodejs-demo-app - a Node.js application",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node --test test/"
+    "start": "node index.js"
   },
-  "dependencies": {
-    "express": "^4.19.2"
+  "engines": {
+    "node": "\u003e=20"
   }
 }
