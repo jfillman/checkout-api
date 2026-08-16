@@ -9,7 +9,13 @@
 # list). A real gotcha, not a guess: an earlier env: dev here produced a live
 # "range can't iterate over dev" Helm error inside that chart.
 #
-# rollout left unset - bootstrap stub, same convention ApplicationEnvironment's own
-# initial values.yaml uses: no real image to deploy yet, just the baseline
-# namespace/ServiceAccount/NetworkPolicy.
+# rollout: null (not left unset) - bootstrap stub, same convention
+# ApplicationEnvironment's own initial values.yaml uses. Confirmed live this has to
+# be explicit: the chart's OWN default rollout: (values.yaml) is a non-null object
+# with an empty image.repository/tag, not skipped - leaving this key out entirely
+# rendered a real Rollout with two InvalidImageName pods instead of the clean
+# namespace-only stub. No real image to deploy yet - just the baseline
+# namespace/ServiceAccount/NetworkPolicy until a developer's own follow-up commit
+# sets a real rollout.image.
 envName: dev
+rollout: null
