@@ -19,6 +19,6 @@
 # sets a real rollout.image.
 envName: dev
 rollout:
-  image: 
+  image:
     repository: ghcr.io/jfillman/checkout-api
-    tag: 0.1.3-0453c38
+    tag: 0.1.5-74fbcc7
