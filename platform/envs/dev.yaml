@@ -4,9 +4,12 @@
 # (gitops-cluster-dev, generated per-app by tenant-appprojects) to provision this
 # env's namespace via idp-service-catalog's idp-application chart.
 #
+# envName, not env - this file also gets fed straight into idp-application's own
+# Helm values, where env: is already a reserved key (the chart's container env-var
+# list). A real gotcha, not a guess: an earlier env: dev here produced a live
+# "range can't iterate over dev" Helm error inside that chart.
+#
 # rollout left unset - bootstrap stub, same convention ApplicationEnvironment's own
 # initial values.yaml uses: no real image to deploy yet, just the baseline
-# namespace/ServiceAccount/NetworkPolicy. cicd.yaml already declares
-# deploy.lowerEnvironments: [dev] - this file is what actually provisions the
-# app-nodejs-demo-app-dev namespace that pipeline-runner's RBAC needs to exist.
-env: dev
+# namespace/ServiceAccount/NetworkPolicy.
+envName: dev
