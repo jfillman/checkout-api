@@ -1,11 +1,10 @@
 {
   "name": "checkout-api",
-  "version": "0.1.3",
+  "version": "0.1.0",
   "description": "checkout-api - a Node.js application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node --test"
+    "start": "node index.js"
   },
   "engines": {
     "node": "\u003e=20"
