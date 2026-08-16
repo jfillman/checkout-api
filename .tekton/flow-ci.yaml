@@ -2,6 +2,10 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   generateName: ci-
+  labels:
+    platform.io/flow: "ci"
+    platform.io/stage: "build"
+    platform.io/step-index: "0"
   annotations:
     pipelinesascode.tekton.dev/on-event: "[push]"
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
@@ -20,6 +24,8 @@ spec:
     - { name: image-repo, value: "ghcr.io/jfillman/checkout-api" }
     - { name: app-namespace, value: "app-checkout-api-cicd" }
     - { name: app-name, value: "checkout-api" }
+    - { name: app-type, value: "app" }
+    - { name: is-flow-terminal, value: "true" }
 
   workspaces:
     - name: source
