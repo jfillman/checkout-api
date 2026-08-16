@@ -21,4 +21,4 @@ envName: dev
 rollout:
   image:
     repository: ghcr.io/jfillman/checkout-api
-    tag: 0.1.5-9a6cf85
+    tag: 0.1.5-a4baea1
