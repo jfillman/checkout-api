@@ -1,0 +1,12 @@
+# Self-service lower-env declaration (idp/docs/gitops-strategy.md §10) - a developer
+# commits straight here, no release pipeline, no gitops-nodejs-demo-app repo
+# involved. Read live by this repo's own nodejs-demo-app-lower-envs ApplicationSet
+# (gitops-cluster-dev, generated per-app by tenant-appprojects) to provision this
+# env's namespace via idp-service-catalog's idp-application chart.
+#
+# rollout left unset - bootstrap stub, same convention ApplicationEnvironment's own
+# initial values.yaml uses: no real image to deploy yet, just the baseline
+# namespace/ServiceAccount/NetworkPolicy. cicd.yaml already declares
+# deploy.lowerEnvironments: [dev] - this file is what actually provisions the
+# app-nodejs-demo-app-dev namespace that pipeline-runner's RBAC needs to exist.
+env: dev
