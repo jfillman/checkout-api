@@ -36,9 +36,13 @@ governance:
     - crossfader@gmail.com
     - 7268337+jfillman@users.noreply.github.com
 
+secrets:
+  - name: slack-webhook-url
+
 notifications:
   slack:
     enabled: true
+    channel: "#all-idp-lab"
 
 # Migrated from the legacy `pipeline:` (singular) list form - removed from the schema
 # in an earlier session (both `pipeline:` itself and each step's `after:` field, which
