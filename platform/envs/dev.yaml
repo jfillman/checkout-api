@@ -18,4 +18,3 @@
 # namespace/ServiceAccount/NetworkPolicy until a developer's own follow-up commit
 # sets a real rollout.image.
 envName: dev
-rollout: null
