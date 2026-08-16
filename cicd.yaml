@@ -16,7 +16,7 @@ test:
   suite: integration # runs ./integration-test.sh, see that file
 
 deploy:
-  lowerEnvironments: []
+  lowerEnvironments: [dev]
   upperEnvironments: []
   strategy: deployment
 
@@ -56,3 +56,7 @@ pipelines:
       branch: main
     steps:
       - stage: build
+      - stage: test
+        env: dev
+      - stage: deploy
+        env: dev
