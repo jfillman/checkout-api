@@ -21,7 +21,7 @@
 # the app chart), not baked into the toolbox image - a template edit takes effect on
 # THIS Application's own next `helm upgrade`, no image rebuild needed.
 #
-# app-nodejs-demo-app-cicd, nodejs-demo-app, jfillman, and (if this Application declared a release stage)
+# app-checkout-api-cicd, checkout-api, jfillman, and (if this Application declared a release stage)
 #  are filled in by deliver-onboarding-files.yaml itself when it
 # delivers this file - see that Task's own substitution loop, which includes this file
 # alongside push.yaml/pull-request.yaml.
@@ -43,8 +43,8 @@ spec:
       - { name: namespace, value: platform-catalog }
   params:
     - { name: git-url, value: "{{ repo_url }}" }
-    - { name: app-namespace, value: "app-nodejs-demo-app-cicd" }
-    - { name: app-name, value: "nodejs-demo-app" }
+    - { name: app-namespace, value: "app-checkout-api-cicd" }
+    - { name: app-name, value: "checkout-api" }
     - { name: github-owner, value: "jfillman" }
     - { name: gitops-repo-url, value: "" }
   taskRunTemplate:

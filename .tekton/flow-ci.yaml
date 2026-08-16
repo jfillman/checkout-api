@@ -17,9 +17,9 @@ spec:
   params:
     - { name: git-url, value: "{{ repo_url }}" }
     - { name: git-revision, value: "{{ revision }}" }
-    - { name: image-repo, value: "ghcr.io/jfillman/nodejs-demo-app" }
-    - { name: app-namespace, value: "app-nodejs-demo-app-cicd" }
-    - { name: app-name, value: "nodejs-demo-app" }
+    - { name: image-repo, value: "ghcr.io/jfillman/checkout-api" }
+    - { name: app-namespace, value: "app-checkout-api-cicd" }
+    - { name: app-name, value: "checkout-api" }
 
   workspaces:
     - name: source
