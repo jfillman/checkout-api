@@ -4,7 +4,8 @@
   "description": "checkout-api - a Node.js application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node --test"
   },
   "engines": {
     "node": "\u003e=20"
