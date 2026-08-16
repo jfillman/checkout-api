@@ -1,6 +1,6 @@
-# nodejs-demo-app
+# checkout-api
 
-nodejs-demo-app - a Node.js application
+checkout-api - a Node.js application
 
 Scaffolded by `NodeJSApplication` (idp-service-catalog). Node 20,
 npm.

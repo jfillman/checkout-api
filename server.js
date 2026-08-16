@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'hello from nodejs-demo-app!!!',
+    message: 'hello from checkout-api!!!',
     version: process.env.APP_VERSION || 'dev',
   });
 });
@@ -18,7 +18,7 @@ app.get('/healthz', (req, res) => {
 
 if (require.main === module) {
   app.listen(port, () => {
-    console.log(`nodejs-demo-app listening on :${port}`);
+    console.log(`checkout-api listening on :${port}`);
   });
 }
 

@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-demo-app",
+  "name": "checkout-api",
   "version": "0.1.0",
-  "description": "nodejs-demo-app - a Node.js application",
+  "description": "checkout-api - a Node.js application",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

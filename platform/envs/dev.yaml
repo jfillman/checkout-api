@@ -1,6 +1,6 @@
 # Self-service lower-env declaration (idp/docs/gitops-strategy.md §10) - a developer
-# commits straight here, no release pipeline, no gitops-nodejs-demo-app repo
-# involved. Read live by this repo's own nodejs-demo-app-lower-envs ApplicationSet
+# commits straight here, no release pipeline, no gitops-checkout-api repo
+# involved. Read live by this repo's own checkout-api-lower-envs ApplicationSet
 # (gitops-cluster-dev, generated per-app by tenant-appprojects) to provision this
 # env's namespace via idp-service-catalog's idp-application chart.
 #
