@@ -18,7 +18,7 @@ test:
 deploy:
   lowerEnvironments: []
   upperEnvironments: []
-  strategy: rollout
+  strategy: deployment
 
 ephemeralEnvironments:
   branch:
