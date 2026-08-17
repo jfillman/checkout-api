@@ -18,6 +18,11 @@
 # namespace/ServiceAccount/NetworkPolicy until a developer's own follow-up commit
 # sets a real rollout.image.
 envName: dev
+# Real 401 hit live pulling this image (ghcr.io/jfillman packages default to private
+# on first push) - idp-application v0.3.9's registryCredentials mechanism fixes it,
+# see that chart's own README/values.yaml for what this actually wires up.
+registryCredentials:
+  enabled: true
 rollout:
   image:
     repository: ghcr.io/jfillman/checkout-api
