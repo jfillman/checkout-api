@@ -17,7 +17,7 @@ test:
 
 deploy:
   lowerEnvironments: [dev]
-  upperEnvironments: []
+  upperEnvironments: [prod]
   strategy: deployment
 
 ephemeralEnvironments:
@@ -60,3 +60,5 @@ pipelines:
         env: dev
       - stage: deploy
         env: dev
+      - stage: release
+        env: prod
