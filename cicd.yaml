@@ -17,7 +17,12 @@ test:
 
 deploy:
   lowerEnvironments: [dev]
-  upperEnvironments: [prod]
+  # object form, not the plain string [prod] - cluster: is now required
+  # (open-release-pr.yaml's gitops-checkout-api layout is <cluster>/<env>/values.yaml,
+  # matching idp-service-catalog's ApplicationEnvironment.spec.cluster for this same
+  # env - see that Task's own 2026-08-16 header note).
+  upperEnvironments:
+    - { name: prod, cluster: kind-prod }
   strategy: deployment
 
 ephemeralEnvironments:
