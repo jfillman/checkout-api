@@ -30,3 +30,11 @@ rollout:
   ports:
     - name: http
       containerPort: 3000
+
+secrets:
+  - name: dummy-secret-01
+    as: env
+    key: DUMMY_SECRET_01
+  - name: dummy-secret-02
+    as: volume
+    mountPath: /etc/dummy-secret-02
