@@ -40,6 +40,6 @@ secrets:
     as: volume
     mountPath: /etc/dummy-secret-02
     shared: true
-  - name: dev/dummy-secret-03
+  - name: dummy-secret-03
     as: env
     key: DUMMY_SECRET_03
