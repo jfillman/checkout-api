@@ -1,7 +1,6 @@
 const http = require('http');
 
 const port = process.env.PORT || 3000;
-validateCheckoutConfig();
 
 const server = http.createServer((req, res) => {
   if (req.url === '/healthz') {
