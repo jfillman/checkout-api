@@ -26,11 +26,10 @@ registryCredentials:
 rollout:
   image:
     repository: ghcr.io/jfillman/checkout-api
-    tag: 0.1.7-71c18cb
+    tag: 0.1.13-2c24b64
   ports:
     - name: http
       containerPort: 3000
-
 secrets:
   - name: dummy-secret-01
     as: env
