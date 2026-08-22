@@ -35,6 +35,9 @@ spec:
           resources:
             requests:
               storage: 2Gi
+    - name: basic-auth
+    secret:
+      secretName: "{{ git_auth_secret }}"
   taskRunTemplate:
     serviceAccountName: pipeline-runner
   timeouts:
