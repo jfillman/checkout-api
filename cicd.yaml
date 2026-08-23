@@ -67,3 +67,4 @@ pipelines:
         env: dev
       - stage: release
         env: prod
+# trigger onboarding-resync: pick up comment-pr-check-result's new revision param
