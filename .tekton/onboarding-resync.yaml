@@ -8,7 +8,7 @@
 # baked into the toolbox image), so an edit takes effect on this app's next `helm upgrade`.
 #
 # app-checkout-api-cicd, checkout-api, app, jfillman, and (if a release stage is
-# declared)  are filled in by deliver-onboarding-files.yaml's own
+# declared) https://github.com/jfillman/gitops-checkout-api are filled in by deliver-onboarding-files.yaml's own
 # substitution loop when it delivers this file.
 apiVersion: tekton.dev/v1
 kind: PipelineRun
