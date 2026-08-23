@@ -32,7 +32,7 @@ spec:
     - { name: app-name, value: "checkout-api" }
     - { name: app-type, value: "app" }
     - { name: github-owner, value: "jfillman" }
-    - { name: gitops-repo-url, value: "" }
+    - { name: gitops-repo-url, value: "https://github.com/jfillman/gitops-checkout-api" }
   taskRunTemplate:
     serviceAccountName: pipeline-runner
   timeouts:
