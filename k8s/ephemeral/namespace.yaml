@@ -12,7 +12,7 @@
 #
 # Base name is deliberately incomplete ("...-pr", no trailing number) - the
 # ApplicationSet's pullRequest-generator template appends "-{{.number}}" via
-# kustomize.nameSuffix, so this becomes e.g. platform-cicd-demo-pr-42 at generation time.
+# kustomize.nameSuffix, so this becomes e.g. app-checkout-api-pr-42 at generation time.
 # The negative sync-wave makes this apply before the Deployment/Service need the
 # namespace to exist.
 #
@@ -24,7 +24,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: platform-cicd-demo-pr
+  name: app-checkout-api-pr
   labels:
     platform.io/ephemeral-env: "true"
   annotations:
