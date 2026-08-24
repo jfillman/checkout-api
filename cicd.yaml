@@ -89,4 +89,4 @@ pipelines:
       labels: ["preview"]
     steps:
       - stage: build
-# trigger onboarding-resync: pick up comment-pr-check-result's new revision param
+# trigger onboarding-resync: pick up flow-ci.yaml's push-branch CEL guard fix (2026-08-24)
