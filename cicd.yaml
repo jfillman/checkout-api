@@ -67,26 +67,11 @@ pipelines:
         env: dev
       - stage: release
         env: prod
-  # Builds and pushes ghcr.io/jfillman/checkout-api-pr:<12-char-sha> for PRs labeled
-  # preview - deliver-onboarding-files.yaml's generator already appends "-pr" to the
-  # image repo for a pull_request-triggered flow, it just needed a pipelines: entry here
-  # to actually generate .tekton/flow-pr-build.yaml. Without this, ephemeralEnvironments.
-  # pullRequest's own ApplicationSet (platform-cicd's ephemeral-envs.yaml) has nothing
-  # that ever produces the image it expects - found live 2026-08-24 chasing a PR preview
-  # env stuck in ImagePullBackOff. (Touched again same day to force onboarding-resync to
-  # regenerate .tekton/flow-pr-build.yaml against build-image.yaml's new pr-tag-only
-  # param - onboarding-resync only reacts to a real cicd.yaml diff on main.)
-  #
-  # labels: ["preview"] matches the label ephemeral-envs.yaml's ApplicationSet generator
-  # itself is gated on - without it this flow builds on EVERY PR, not just ones that
-  # actually get a preview environment (found live 2026-08-24, same day as the
-  # ImagePullBackOff fix above).
-  pr-build:
-    trigger:
-      source: git
-      event: pull_request
-      branch: main
-      labels: ["preview"]
-    steps:
-      - stage: build
-# trigger onboarding-resync: pick up flow-ci.yaml's push-branch CEL guard fix (2026-08-24)
+  # No hand-written pr-build entry needed anymore - ephemeralEnvironments.pullRequest.
+  # enabled above is now the whole switch. deliver-onboarding-files.yaml synthesizes a
+  # pull_request-triggered, build-only, -pr-tagged flow automatically (branch/labels
+  # derived from ci's own branch and ephemeralEnvironments.pullRequest.labels) whenever
+  # this is true and no explicit pipelines.pr-build is declared - see that Task's own
+  # 2026-08-24 header note. Declare pipelines.pr-build explicitly here only to override
+  # the default shape (a different base branch, extra steps, etc).
+# trigger onboarding-resync: pick up the pr-build auto-synthesis fix (2026-08-24)
