@@ -73,7 +73,9 @@ pipelines:
   # here to actually generate .tekton/flow-pr-build.yaml. Without this, ephemeralEnvironments.
   # pullRequest's own ApplicationSet (platform-cicd's ephemeral-envs.yaml) has nothing
   # that ever produces the image it expects - found live 2026-08-24 chasing a PR preview
-  # env stuck in ImagePullBackOff.
+  # env stuck in ImagePullBackOff. (Touched again same day to force onboarding-resync to
+  # regenerate .tekton/flow-pr-build.yaml against build-image.yaml's new pr-tag-only
+  # param - onboarding-resync only reacts to a real cicd.yaml diff on main.)
   pr-build:
     trigger:
       source: git
