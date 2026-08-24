@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'hello from checkout-api!!!',
+    message: 'greetings from checkout-api!!!',
     version: process.env.APP_VERSION || 'dev',
   });
 });
