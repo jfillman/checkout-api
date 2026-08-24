@@ -2,8 +2,6 @@ const http = require('http');
 
 const port = process.env.PORT || 3000;
 
-const checkoutGreeting = 'hello from checkout-api!!!';
-
 const server = http.createServer((req, res) => {
   if (req.url === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -11,9 +9,9 @@ const server = http.createServer((req, res) => {
     return;
   }
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end(checkoutGreeting);
+  res.end("Hello from checkout-api\\n");
 });
 
 server.listen(port, () => {
-  console.log(`checkout-api listening on port ${port}`);
+  console.log("checkout-api listening on port ${port}");
 });
