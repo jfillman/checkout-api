@@ -1,7 +1,7 @@
 # k8s/ephemeral/deployment.yaml
 #
 # No metadata.namespace set here, deliberately - the ApplicationSet's Application
-# template sets spec.destination.namespace per-PR (platform-cicd-demo-pr-<number>), and
+# template sets spec.destination.namespace per-PR (app-checkout-api-pr-<number>), and
 # an un-namespaced manifest lands wherever the sync target says, same as `kubectl apply
 # -f x.yaml -n foo` for a file with no namespace of its own. A hardcoded namespace here
 # would fight that, since this same base is reused for every PR's Application, not just
