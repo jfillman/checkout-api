@@ -67,4 +67,18 @@ pipelines:
         env: dev
       - stage: release
         env: prod
+  # Builds and pushes ghcr.io/jfillman/checkout-api-pr:<12-char-sha> for every PR
+  # targeting main - deliver-onboarding-files.yaml's generator already appends "-pr" to
+  # the image repo for a pull_request-triggered flow, it just needed a pipelines: entry
+  # here to actually generate .tekton/flow-pr-build.yaml. Without this, ephemeralEnvironments.
+  # pullRequest's own ApplicationSet (platform-cicd's ephemeral-envs.yaml) has nothing
+  # that ever produces the image it expects - found live 2026-08-24 chasing a PR preview
+  # env stuck in ImagePullBackOff.
+  pr-build:
+    trigger:
+      source: git
+      event: pull_request
+      branch: main
+    steps:
+      - stage: build
 # trigger onboarding-resync: pick up comment-pr-check-result's new revision param
