@@ -1,0 +1,27 @@
+# platform/pr-env.yaml
+#
+# Shared template for every PR-based ephemeral environment (platform-cicd's pr-envs
+# ApplicationSet, ephemeral-envs.yaml) - same idp-service-catalog idp-application chart
+# and directory convention as platform/envs/dev.yaml's lower-env tier, just one static
+# file reused for every PR rather than one file per env (a PR number isn't a fixed
+# filename). Deliberately NOT platform/envs/pr.yaml - lower-envs-applicationset.yaml's
+# own generator already watches platform/envs/*.yaml for the dev-tier lower env, and a
+# file there would collide with it.
+#
+# envName and rollout.image are NOT set here - the ApplicationSet template stamps both
+# per-PR via its own valuesObject, which wins over this valueFiles-sourced content
+# (same precedence platform/envs/dev.yaml's own comment documents relying on). Setting
+# either here would be silently overridden, not an error.
+#
+# Read from this PR's own branch (not main), so editing this file inside a PR
+# customizes that PR's own preview environment - anything below is yours to change.
+rollout:
+  ports:
+    - name: http
+      containerPort: 3000
+  readinessProbe:
+    httpGet: { path: /healthz, port: http }
+    initialDelaySeconds: 3
+  livenessProbe:
+    httpGet: { path: /healthz, port: http }
+    initialDelaySeconds: 3
