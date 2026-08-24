@@ -14,3 +14,4 @@ npm start
 `CicdOnboarded` condition tracking whether `platform-cicd`'s tenant-onboarding
 ApplicationSet has picked up this app's committed tenant identity yet. See the
 resource's own status for details.
+# namespace cascade-delete verification 2026-08-24T16:08:41Z
