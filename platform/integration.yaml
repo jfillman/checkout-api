@@ -1,7 +1,7 @@
 apiVersion: testworkflows.testkube.io/v1
 kind: TestWorkflow
 metadata:
-  name: integration   # overwritten to "<app-name>-<suite>" at apply time - see
+  name: integration   # overwritten to "<app-name>-<test-name>" at apply time - see
                        # docs/user/cicd-yaml-reference.md's `test:` section in
                        # platform-cicd for why this can't be relied on as-written.
 spec:

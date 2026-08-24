@@ -13,7 +13,7 @@ build:
     enabled: true
 
 test:
-  suite: integration # runs ./integration-test.sh, see that file
+  name: integration # runs platform/integration.yaml (Testkube TestWorkflow)
 
 deploy:
   lowerEnvironments: [dev]
