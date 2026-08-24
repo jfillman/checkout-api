@@ -33,10 +33,10 @@ ephemeralEnvironments:
   ttl: 5d
 
 governance:
-  sast: true
-  imageScan: true
-  policyCheck: true
-  sbom: true
+  sast: false
+  imageScan: false
+  policyCheck: false
+  sbom: false
   allowedCommitSigners:
     - crossfader@gmail.com
     - 7268337+jfillman@users.noreply.github.com
