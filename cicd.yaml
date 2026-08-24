@@ -74,4 +74,6 @@ pipelines:
   # this is true and no explicit pipelines.pr-build is declared - see that Task's own
   # 2026-08-24 header note. Declare pipelines.pr-build explicitly here only to override
   # the default shape (a different base branch, extra steps, etc).
-# trigger onboarding-resync: pick up the pr-build auto-synthesis fix (2026-08-24)
+# trigger onboarding-resync: re-fire now that platform-cicd-catalog's ArgoCD sync of the
+# pr-build auto-synthesis fix has actually landed (the first attempt raced ArgoCD's own
+# sync and used the pre-fix Task, 2026-08-24)
