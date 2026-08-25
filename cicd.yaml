@@ -77,3 +77,5 @@ pipelines:
 # trigger onboarding-resync: re-fire now that platform-cicd-catalog's ArgoCD sync of the
 # pr-build auto-synthesis fix has actually landed (the first attempt raced ArgoCD's own
 # sync and used the pre-fix Task, 2026-08-24)
+# trigger onboarding-resync again: pick up the opened/labeled duplicate-fire CEL fix
+# (PR #19 double-built and double-notified Slack, 2026-08-24)
