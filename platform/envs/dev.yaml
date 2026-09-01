@@ -26,7 +26,7 @@ registryCredentials:
 rollout:
   image:
     repository: ghcr.io/jfillman/checkout-api
-    tag: 0.2.9-33dff8d
+    tag: 0.2.10-f6ab250
   ports:
     - name: http
       containerPort: 3000
