@@ -23,6 +23,7 @@ deploy:
   # env - see that Task's own 2026-08-16 header note).
   upperEnvironments:
     - { name: prod, cluster: kind-prod }
+    - { name: staging, cluster: kind-prod }
   strategy: deployment
 
 ephemeralEnvironments:
@@ -66,7 +67,11 @@ pipelines:
       - stage: deploy
         env: dev
       - stage: release
+        env: staging
+      - stage: release
         env: prod
+        # no branch filter - any push to main triggers a release to prod, not just the
+        # first one (the "release" stage is idempotent, so this is safe and useful)
   # No hand-written pr-build entry needed anymore - ephemeralEnvironments.pullRequest.
   # enabled above is now the whole switch. deliver-onboarding-files.yaml synthesizes a
   # pull_request-triggered, build-only, -pr-tagged flow automatically (branch/labels
