@@ -24,3 +24,4 @@ spec:
           echo "secret materialized ok (length ${#SLACK_WEBHOOK_URL})"
         fi
         echo "checkout-api integration smoke test - passed"
+        sleep 10
