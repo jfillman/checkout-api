@@ -3,6 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: ci-
   labels:
+    platform.io/app: "checkout-api"
     platform.io/flow: "ci"
     platform.io/stage: "build"
     platform.io/step-index: "0"

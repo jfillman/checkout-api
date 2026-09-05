@@ -3,6 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: pr-build-
   labels:
+    platform.io/app: "checkout-api"
     platform.io/flow: "pr-build"
     platform.io/stage: "build"
     platform.io/step-index: "0"
