@@ -16,7 +16,9 @@ test:
   name: integration # runs platform/integration.yaml (Testkube TestWorkflow)
 
 deploy:
-  lowerEnvironments: [dev]
+  lowerEnvironments: 
+    - dev
+    - test
   # object form, not the plain string [prod] - cluster: is now required
   # (open-release-pr.yaml's gitops-checkout-api layout is <cluster>/<env>/values.yaml,
   # matching idp-service-catalog's ApplicationEnvironment.spec.cluster for this same
