@@ -13,5 +13,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, () => {
-  console.log("checkout-api listening on port ${port}");
+  console.log(`checkout-api listening on port ${port}`);
 });
