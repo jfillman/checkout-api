@@ -1,0 +1,52 @@
+# Self-service lower-env declaration (idp/docs/gitops-strategy.md §10) - a developer
+# commits straight here, no release pipeline, no gitops-checkout-api repo
+# involved. Read live by this repo's own checkout-api-lower-envs ApplicationSet
+# (gitops-cluster-dev, generated per-app by tenant-appprojects) to provision this
+# env's namespace via idp-service-catalog's idp-application chart.
+#
+# envName, not env - this file also gets fed straight into idp-application's own
+# Helm values, where env: is already a reserved key (the chart's container env-var
+# list). A real gotcha, not a guess: an earlier env: dev here produced a live
+# "range can't iterate over dev" Helm error inside that chart.
+#
+# rollout: null (not left unset) - bootstrap stub, same convention
+# ApplicationEnvironment's own initial values.yaml uses. Confirmed live this has to
+# be explicit: the chart's OWN default rollout: (values.yaml) is a non-null object
+# with an empty image.repository/tag, not skipped - leaving this key out entirely
+# rendered a real Rollout with two InvalidImageName pods instead of the clean
+# namespace-only stub. No real image to deploy yet - just the baseline
+# namespace/ServiceAccount/NetworkPolicy until a developer's own follow-up commit
+# sets a real rollout.image.
+envName: test
+# Real 401 hit live pulling this image (ghcr.io/jfillman packages default to private
+# on first push) - idp-application v0.3.9's registryCredentials mechanism fixes it,
+# see that chart's own README/values.yaml for what this actually wires up.
+registryCredentials:
+  enabled: true
+rollout:
+  image:
+    repository: ghcr.io/jfillman/checkout-api
+    tag: 0.3.18-a670c30
+  ports:
+    - name: http
+      containerPort: 3000
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 3000
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 3000
+secrets:
+  - name: dummy-secret-01
+    as: env
+    key: DUMMY_SECRET_01
+    shared: true
+  - name: dummy-secret-02
+    as: volume
+    mountPath: /etc/dummy-secret-02
+    shared: true
+  - name: dummy-secret-03
+    as: env
+    key: DUMMY_SECRET_03
