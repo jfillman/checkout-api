@@ -39,5 +39,12 @@ spec:
               storage: 2Gi
   taskRunTemplate:
     serviceAccountName: pipeline-runner
+  taskRunSpecs:
+    - pipelineTaskName: notify-backstage
+      podTemplate:
+        hostAliases:
+          - ip: 192.168.64.6
+            hostnames:
+              - backstage.prod.kiac.local
   timeouts:
     pipeline: "1h"
