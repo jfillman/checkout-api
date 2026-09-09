@@ -58,6 +58,8 @@ notifications:
   slack:
     enabled: true
     channel: "#all-idp-lab"
+  backstage:
+    enabled: true
 
 # Migrated from the legacy `pipeline:` (singular) list form - removed from the schema
 # in an earlier session (both `pipeline:` itself and each step's `after:` field, which
