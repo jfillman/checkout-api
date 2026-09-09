@@ -3,10 +3,10 @@ kind: PipelineRun
 metadata:
   generateName: ci-0-build-
   labels:
-    platform.io/app: "checkout-api"
-    platform.io/flow: "ci"
-    platform.io/stage: "build"
-    platform.io/step-index: "0"
+    hangar.io/app: "checkout-api"
+    hangar.io/flow: "ci"
+    hangar.io/stage: "build"
+    hangar.io/step-index: "0"
   annotations:
     pipelinesascode.tekton.dev/on-event: "[push]"
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
