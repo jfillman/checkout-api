@@ -34,16 +34,16 @@ rollout:
     httpGet:
       path: /healthz
       port: 3000
-      initialDelaySeconds: 5
-      periodSeconds: 5
-      timeoutSeconds: 5
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 5
   readinessProbe:
     httpGet:
       path: /healthz
       port: 3000
-      initialDelaySeconds: 5
-      periodSeconds: 10
-      timeoutSeconds: 5
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
 secrets:
   - name: dummy-secret-01
     as: env
