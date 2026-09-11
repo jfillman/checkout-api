@@ -1,6 +1,6 @@
 {
   "name": "checkout-api",
-  "version": "0.3.27",
+  "version": "0.4.0",
   "description": "checkout-api - a Node.js application",
   "main": "index.js",
   "scripts": {
