@@ -28,11 +28,13 @@ deploy:
     - { name: prod, cluster: kind-prod }
     - { name: pre-prod, cluster: kind-prod }
     - { name: staging, cluster: kind-prod }
+    - { name: proofing, cluster: kind-prod }
   strategy: deployment
   promotionOrder:
     - dev
     - test
     - perf
+    - proofing
     - staging
     - pre-prod
     - prod
@@ -83,8 +85,8 @@ pipelines:
         env: test
       - stage: test
         env: test
-#      - stage: release
-#        env: staging
+      - stage: release
+        env: proofing
 #      - stage: release
 #        env: prod
         # no branch filter - any push to main triggers a release to prod, not just the
