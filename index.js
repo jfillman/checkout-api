@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     return;
   }
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end("checkout-api: Hello!!\\n");
+  res.end("checkout-api: Hello World!!\\n");
 });
 
 server.listen(port, () => {
