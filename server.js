@@ -18,7 +18,7 @@ app.get('/healthz', (req, res) => {
 
 if (require.main === module) {
   app.listen(port, () => {
-    console.log(`checkout-api listening on :${port}`);
+    console.log(`checkout-api listening on port :${port}`);
   });
 }
 
