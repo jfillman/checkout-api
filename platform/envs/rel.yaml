@@ -1,0 +1,31 @@
+envName: rel
+rollout:
+  ports:
+    - name: http
+      containerPort: 3000
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+secrets:
+  - name: dummy-secret-01
+    as: env
+    key: DUMMY_SECRET_01
+    shared: true
+  - name: dummy-secret-02
+    as: volume
+    mountPath: /etc/dummy-secret-02
+    shared: true
+  - name: dummy-secret-03
+    as: env
+    key: DUMMY_SECRET_03
