@@ -11,28 +11,34 @@ build:
   sonar: false
   cache:
     enabled: true
+    size: small
+  sourceVolume:
+    size: small
 
 test:
-  name: integration # runs platform/integration.yaml (Testkube TestWorkflow)
+  enabled: true
+  name: integration
 
 deploy:
   lowerEnvironments:
     - dev
     - test
+    - rel
     - perf
-  # object form, not the plain string [prod] - cluster: is now required
-  # (open-release-pr.yaml's gitops-checkout-api layout is <cluster>/<env>/values.yaml,
-  # matching idp-service-catalog's ApplicationEnvironment.spec.cluster for this same
-  # env - see that Task's own 2026-08-16 header note).
   upperEnvironments:
-    - { name: prod, cluster: kind-prod }
-    - { name: pre-prod, cluster: kind-prod }
-    - { name: staging, cluster: kind-prod }
-    - { name: proofing, cluster: kind-prod }
+    - name: prod
+      cluster: kind-prod
+    - name: pre-prod
+      cluster: kind-prod
+    - name: staging
+      cluster: kind-prod
+    - name: proofing
+      cluster: kind-prod
   strategy: deployment
   promotionOrder:
     - dev
     - test
+    - rel
     - perf
     - proofing
     - staging
@@ -42,8 +48,12 @@ deploy:
 ephemeralEnvironments:
   branch:
     enabled: false
+    patterns:
+      - preview/*
   pullRequest:
     enabled: true
+    labels:
+      - preview
   ttl: 5d
 
 governance:
@@ -62,6 +72,7 @@ notifications:
   slack:
     enabled: true
     channel: "#all-idp-lab"
+    scanResults: false
   backstage:
     enabled: true
 
@@ -87,20 +98,20 @@ pipelines:
         env: test
       - stage: release
         env: proofing
-#      - stage: release
-#        env: prod
+        #      - stage: release
+        #        env: prod
         # no branch filter - any push to main triggers a release to prod, not just the
         # first one (the "release" stage is idempotent, so this is safe and useful)
-  # No hand-written pr-build entry needed anymore - ephemeralEnvironments.pullRequest.
-  # enabled above is now the whole switch. deliver-onboarding-files.yaml synthesizes a
-  # pull_request-triggered, build-only, -pr-tagged flow automatically (branch/labels
-  # derived from ci's own branch and ephemeralEnvironments.pullRequest.labels) whenever
-  # this is true and no explicit pipelines.pr-build is declared - see that Task's own
-  # 2026-08-24 header note. Declare pipelines.pr-build explicitly here only to override
-  # the default shape (a different base branch, extra steps, etc).
-# trigger onboarding-resync: re-fire now that platform-cicd-catalog's ArgoCD sync of the
-# pr-build auto-synthesis fix has actually landed (the first attempt raced ArgoCD's own
-# sync and used the pre-fix Task, 2026-08-24)
-# trigger onboarding-resync again: pick up the opened/labeled duplicate-fire CEL fix
-# (PR #19 double-built and double-notified Slack, 2026-08-24)
-# onboarding-resync-trigger: 2026-08-30T05:44:01Z
+        # No hand-written pr-build entry needed anymore - ephemeralEnvironments.pullRequest.
+        # enabled above is now the whole switch. deliver-onboarding-files.yaml synthesizes a
+        # pull_request-triggered, build-only, -pr-tagged flow automatically (branch/labels
+        # derived from ci's own branch and ephemeralEnvironments.pullRequest.labels) whenever
+        # this is true and no explicit pipelines.pr-build is declared - see that Task's own
+        # 2026-08-24 header note. Declare pipelines.pr-build explicitly here only to override
+        # the default shape (a different base branch, extra steps, etc).
+        # trigger onboarding-resync: re-fire now that platform-cicd-catalog's ArgoCD sync of the
+        # pr-build auto-synthesis fix has actually landed (the first attempt raced ArgoCD's own
+        # sync and used the pre-fix Task, 2026-08-24)
+        # trigger onboarding-resync again: pick up the opened/labeled duplicate-fire CEL fix
+        # (PR #19 double-built and double-notified Slack, 2026-08-24)
+        # onboarding-resync-trigger: 2026-08-30T05:44:01Z
