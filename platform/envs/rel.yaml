@@ -17,6 +17,9 @@ rollout:
     initialDelaySeconds: 5
     periodSeconds: 10
     timeoutSeconds: 5
+  image:
+    repository: ghcr.io/jfillman/checkout-api
+    tag: 0.5.3-3e9c9d9
 secrets:
   - name: dummy-secret-01
     as: env
